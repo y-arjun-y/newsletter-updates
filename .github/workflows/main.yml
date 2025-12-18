@@ -1,0 +1,26 @@
+name: Test Secret Connection
+
+on: [push]
+
+jobs:
+  test-secret-access:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Verify Secret
+        # We map the GitHub Secret to an Environment Variable here
+        env:
+          MY_TEST_SECRET: ${{ secrets.DISCORD_WEBHOOK_URL }}
+
+        # We run a script to check if it exists (without printing the actual value)
+        run: |
+          if [ -z "$MY_TEST_SECRET" ]; then
+            echo "❌ Error: The secret was NOT found."
+            exit 1
+          else
+            echo "✅ Success: The secret was found!"
+            echo "The secret has a length of ${#MY_TEST_SECRET} characters."
+            echo "Content is masked: $MY_TEST_SECRET" 
+          fi

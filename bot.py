@@ -5,7 +5,7 @@ import os
 import time
 
 # --- CONFIGURATION ---
-WEBHOOK_URL = os.environ.get("DISCORD_WEBHOOK_URL")  # We get this from GitHub Secrets
+WEBHOOK_URL = os.environ.get("DISCORD_WEBHOOK_URL")
 STATE_FILE = "feed_state.json"
 
 NEWSLETTERS = {
