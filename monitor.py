@@ -22,7 +22,7 @@ SUBSTACKS = [
 WEBHOOK_URL = os.environ.get("DISCORD_WEBHOOK_URL")
 
 # 3. Time Window: How far back to check? (Last 70 mins to be safe for hourly runs)
-TIME_WINDOW_MINUTES = 70
+TIME_WINDOW_MINUTES = 40000
 
 
 def send_notification(title, link, author):
