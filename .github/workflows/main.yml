@@ -1,26 +1,30 @@
-name: Test Secret Connection
+name: Hourly Substack Monitor
 
-on: [push]
+on:
+  # Run manually if you want to test
+  workflow_dispatch:
+  # Run every hour at minute 0 (1:00, 2:00, etc.)
+  schedule:
+    - cron: "0 * * * *"
 
 jobs:
-  test-secret-access:
+  check-newsletters:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Verify Secret
-        # We map the GitHub Secret to an Environment Variable here
-        env:
-          MY_TEST_SECRET: ${{ secrets.DISCORD_WEBHOOK_URL }}
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
 
-        # We run a script to check if it exists (without printing the actual value)
+      - name: Install Dependencies
         run: |
-          if [ -z "$MY_TEST_SECRET" ]; then
-            echo "❌ Error: The secret was NOT found."
-            exit 1
-          else
-            echo "✅ Success: The secret was found!"
-            echo "The secret has a length of ${#MY_TEST_SECRET} characters."
-            echo "Content is masked: $MY_TEST_SECRET" 
-          fi
+          pip install -r requirements.txt
+
+      - name: Run Monitor Script
+        env:
+          # Ensure this matches the name in your GitHub Secrets
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: python monitor.py
