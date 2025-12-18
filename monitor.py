@@ -7,9 +7,15 @@ from datetime import timezone
 
 # --- CONFIGURATION ---
 # 1. List your Substacks here (use the main URL, we append /feed automatically)
+
 SUBSTACKS = [
-    "https://newsletter.pragmaticengineer.com",
-    "https://www.lennysnewsletter.com",
+    "https://thingofthings.substack.com",
+    "https://www.slowboring.com",
+    "https://www.astralcodexten.com",
+    "https://benthamsbulldog.substack.com",
+    "https://celestemarcus.substack.com",
+    "https://themarginalhour.substack.com",
+    "https://yarjuny.substack.com",
 ]
 
 # 2. Get the Webhook URL from GitHub Secrets
