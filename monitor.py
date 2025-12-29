@@ -10,7 +10,6 @@ from datetime import timezone
 
 SUBSTACKS = [
     "https://thingofthings.substack.com/",
-    "https://www.slowboring.com",
     "https://www.astralcodexten.com",
     "https://benthams.substack.com/",
     "https://ceselder.substack.com/",
@@ -21,8 +20,8 @@ SUBSTACKS = [
 # 2. Get the Webhook URL from GitHub Secrets
 WEBHOOK_URL = os.environ.get("DISCORD_WEBHOOK_URL")
 
-# 3. Time Window: How far back to check? (Last 70 mins to be safe for hourly runs)
-TIME_WINDOW_MINUTES = 70
+# 3. Time Window: How far back to check? (20 mins to be safe for 15-min runs)
+TIME_WINDOW_MINUTES = 20
 
 
 def send_notification(title, link, author):
